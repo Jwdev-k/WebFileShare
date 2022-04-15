@@ -13,6 +13,8 @@ import web.fileshare.service.impl.FileServiceimpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
@@ -28,7 +30,18 @@ public class FileController {
         if (data != null) {
             //String rootDirectory = request.getSession().getServletContext().getRealPath("/");
             try {
-                fs.saveFile(new FileDTO(0, data.getOriginalFilename(), data.getBytes(), (int) data.getSize()));
+                File folder = new File(System.getProperty("user.dir") + File.separator + "data");
+                try {
+                    if (!folder.exists()) {
+                        folder.mkdir();
+                        log.info("폴더를 생성하였습니다.");
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException("create folder failed.", e);
+                }
+                File savePath = new File(folder + File.separator + data.getOriginalFilename());
+                data.transferTo(savePath);
+                fs.saveFile(new FileDTO(0, data.getOriginalFilename(), savePath.toString(), (int) data.getSize()));
                 log.info(data.getOriginalFilename() + "파일이 업로드 되었습니다.");
             } catch (RuntimeException e) {
                 e.getStackTrace();
@@ -45,10 +58,11 @@ public class FileController {
     @RequestMapping(value = "service/download")
     public void fileDown(HttpServletResponse response, @RequestParam(value = "num") int num) throws Exception {
         FileDTO getFile = fs.getFile(num);
+        FileInputStream inputStream = new FileInputStream(getFile.getDataPath());
         response.setContentType("application/octet-stream");
-        response.setContentLength(getFile.getData().length);
+        response.setContentLength(getFile.getSize());
         response.setHeader("Content-Disposition",  "attachment; fileName=\""+ URLEncoder.encode(getFile.getFilename(), "UTF-8")+"\";");
-        response.getOutputStream().write(getFile.getData());
+        response.getOutputStream().write(inputStream.readAllBytes());
         response.getOutputStream().flush();
         response.getOutputStream().close();
     }

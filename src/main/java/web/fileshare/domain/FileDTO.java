@@ -12,7 +12,7 @@ import lombok.ToString;
 public class FileDTO {
     private int num;
     private String filename;
-    private byte[] data;
+    private String dataPath;
     private int size;
 
     public FileDTO(int num, String filename, int size) {

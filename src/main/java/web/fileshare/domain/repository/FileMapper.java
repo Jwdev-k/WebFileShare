@@ -7,7 +7,7 @@ import web.fileshare.domain.FileDTO;
 import java.util.ArrayList;
 
 public interface FileMapper {
-    @Insert("INSERT INTO filedata VALUES(null, #{filename}, #{data}, #{size})")
+    @Insert("INSERT INTO filedata VALUES(null, #{filename}, #{dataPath}, #{size})")
     void saveFile(FileDTO data) throws Exception;
 
     @Select("SELECT * FROM filedata WHERE num = #{num}")
