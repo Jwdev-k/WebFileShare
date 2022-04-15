@@ -13,4 +13,5 @@ public class FileDTO {
     private int num;
     private String filename;
     private byte[] data;
+    private int size;
 }

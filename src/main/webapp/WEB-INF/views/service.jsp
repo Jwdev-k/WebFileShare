@@ -17,11 +17,13 @@
             </tr>
             </thead>
             <tbody>
+            <c:forEach items="${FileList}" var="list">
                 <tr>
-                    <td>1</td>
-                    <td><a href="/"/>파일명</td></a>
-                    <td>874151</td>
+                    <td>${list.num}</td>
+                    <td><a href="service/download?num=${list.num}"/>${list.filename}</td>
+                    <td>${list.size} byte</td>
                 </tr>
+            </c:forEach>
             </tbody>
         </table>
     </div>

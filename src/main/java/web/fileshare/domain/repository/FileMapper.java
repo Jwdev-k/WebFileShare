@@ -7,12 +7,12 @@ import web.fileshare.domain.FileDTO;
 import java.util.ArrayList;
 
 public interface FileMapper {
-    @Insert("INSERT INTO filedata VALUES(null, #{filename}, #{data})")
+    @Insert("INSERT INTO filedata VALUES(null, #{filename}, #{data}, #{size})")
     void saveFile(FileDTO data) throws Exception;
 
     @Select("SELECT * FROM filedata WHERE num = #{num}")
     FileDTO getFile(int num) throws Exception;
 
-    @Select("SELECT * FROM ( SELECT * FROM boardlist LIMIT #{start}, 10 ) sub ORDER BY bno DESC")
+    @Select("SELECT * FROM filedata")
     ArrayList<FileDTO> fileList() throws Exception;
 }
