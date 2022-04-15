@@ -27,18 +27,13 @@
             </tbody>
         </table>
     </div>
-    <div class="container">
-        <div class="row">
-            <form method="post" enctype="multipart/form-data">
-                <h1>파일 업로드</h1>
-                <label>파일:</label>
-                <input multiple="multiple" type="file" name="data">
-                <input type="submit" class="btn btn-primary" value="파일 업로드">
-            </form>
-        </div>
-    </div>
+    <form method="post" enctype="multipart/form-data" >
+        <h1>파일 업로드</h1>
+        <label class="pull-left">파일:</label>
+        <input multiple="multiple" type="file" name="data">
+        <input type="submit" class="btn btn-primary" value="파일 업로드">
+    </form>
 </div>
-
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 </body>
 </html>

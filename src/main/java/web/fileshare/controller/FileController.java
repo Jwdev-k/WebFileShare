@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import web.fileshare.domain.FileDTO;
 import web.fileshare.service.impl.FileServiceimpl;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -23,10 +24,15 @@ public class FileController {
     FileServiceimpl fs;
 
     @RequestMapping(value = "/service", method = {RequestMethod.GET, RequestMethod.POST})
-    public String service(Model model, @RequestParam(value = "data",required = false)MultipartFile data) throws Exception {
+    public String service(Model model, HttpServletRequest request, @RequestParam(value = "data",required = false)MultipartFile data) throws Exception {
         if (data != null) {
-            fs.saveFile(new FileDTO(0, data.getOriginalFilename(), data.getBytes(), (int) data.getSize()));
-            log.info(data.getOriginalFilename() + "파일이 업로드 되었습니다.");
+            //String rootDirectory = request.getSession().getServletContext().getRealPath("/");
+            try {
+                fs.saveFile(new FileDTO(0, data.getOriginalFilename(), data.getBytes(), (int) data.getSize()));
+                log.info(data.getOriginalFilename() + "파일이 업로드 되었습니다.");
+            } catch (RuntimeException e) {
+                e.getStackTrace();
+            }
             return "redirect:service";
         }
         ArrayList<FileDTO> filelist = fs.fileList();
@@ -46,5 +52,4 @@ public class FileController {
         response.getOutputStream().flush();
         response.getOutputStream().close();
     }
-
 }

@@ -13,6 +13,6 @@ public interface FileMapper {
     @Select("SELECT * FROM filedata WHERE num = #{num}")
     FileDTO getFile(int num) throws Exception;
 
-    @Select("SELECT * FROM filedata")
+    @Select("SELECT num,filename,size FROM filedata")
     ArrayList<FileDTO> fileList() throws Exception;
 }
