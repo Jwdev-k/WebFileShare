@@ -23,10 +23,10 @@ import java.util.ArrayList;
 public class FileController {
 
     @Autowired
-    FileServiceimpl fs;
+    private FileServiceimpl fs;
 
     @RequestMapping(value = "/service", method = {RequestMethod.GET, RequestMethod.POST})
-    public String service(Model model, HttpServletRequest request, @RequestParam(value = "data",required = false)MultipartFile data) throws Exception {
+    public String service(Model model, HttpServletRequest request, @RequestParam(value = "data",required = false) MultipartFile data) throws Exception {
         if (data != null) {
             //String rootDirectory = request.getSession().getServletContext().getRealPath("/");
             try {

@@ -1,5 +1,6 @@
 package web.fileshare.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import web.fileshare.domain.FileDTO;
 import web.fileshare.domain.repository.FileDAO;
@@ -10,7 +11,8 @@ import java.util.ArrayList;
 @Service
 public class FileServiceimpl implements FileService {
 
-    private static final FileDAO fd = new FileDAO();
+    @Autowired
+    private FileDAO fd;
 
     @Override
     public void saveFile(FileDTO data) throws Exception {

@@ -26,4 +26,11 @@ public class LoginDAO implements LoginMapper {
         getSqlSession().close();
         return mapper.login(user);
     }
+
+    @Override
+    public UserDTO loginSecurity(String id) throws Exception {
+        var mapper = getSqlSession().getMapper(LoginMapper.class);
+        getSqlSession().close();
+        return mapper.loginSecurity(id);
+    }
 }
