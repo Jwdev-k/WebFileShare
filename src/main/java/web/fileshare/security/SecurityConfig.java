@@ -21,6 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/service/delete").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/")
                 .loginProcessingUrl("/login")

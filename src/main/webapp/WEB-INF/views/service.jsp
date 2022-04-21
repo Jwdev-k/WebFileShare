@@ -19,7 +19,7 @@
             <tbody>
             <c:forEach items="${FileList}" var="list">
                 <tr>
-                    <td>${list.num}</td>
+                    <td><a href="service/delete?num=${list.num}"/>${list.num}</td>
                     <td><a href="service/download?num=${list.num}"/>${list.filename}</td>
                     <td>${list.size} byte</td>
                 </tr>

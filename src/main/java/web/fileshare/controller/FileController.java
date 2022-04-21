@@ -46,7 +46,7 @@ public class FileController {
             } catch (RuntimeException e) {
                 e.getStackTrace();
             }
-            return "redirect:service";
+            return "redirect:/service";
         }
         ArrayList<FileDTO> filelist = fs.fileList();
         if (!filelist.isEmpty()) {
@@ -65,5 +65,17 @@ public class FileController {
         response.getOutputStream().write(inputStream.readAllBytes());
         response.getOutputStream().flush();
         response.getOutputStream().close();
+    }
+
+    @RequestMapping(value = "service/delete", method = RequestMethod.GET)
+    public String deleteFile(@RequestParam(value = "num") int num) throws Exception {
+        FileDTO getFile = fs.getFile(num);
+        File deleteFile= new File(getFile.getDataPath());
+        if (deleteFile.exists()) {
+            deleteFile.delete();
+            fs.deleteFile(num);
+            log.info(num + "번호의 파일을 삭제하였습니다.");
+        }
+        return "redirect:/service";
     }
 }

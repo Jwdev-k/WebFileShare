@@ -28,4 +28,9 @@ public class FileServiceimpl implements FileService {
     public ArrayList<FileDTO> fileList() throws Exception {
         return fd.fileList();
     }
+
+    @Override
+    public void deleteFile(int num) throws Exception {
+        fd.deleteFile(num);
+    }
 }

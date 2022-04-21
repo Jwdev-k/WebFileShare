@@ -41,4 +41,11 @@ public class FileDAO implements FileMapper {
         getSqlSession().close();
         return mapper.fileList();
     }
+
+    @Override
+    public void deleteFile(int num) throws Exception {
+        var mapper = getSqlSession().getMapper(FileMapper.class);
+        getSqlSession().close();
+        mapper.deleteFile(num);
+    }
 }
