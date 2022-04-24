@@ -1,10 +1,12 @@
 package web.fileshare.security;
 
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+@AllArgsConstructor
 public class CustomUserDetails implements UserDetails {
     private String username;
     private String password;

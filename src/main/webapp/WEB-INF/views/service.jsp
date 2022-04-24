@@ -27,12 +27,15 @@
             </tbody>
         </table>
     </div>
+    <c:set var="userID" value="${userID}"/>
+    <c:if test= "${userID != null}">
     <form method="post" enctype="multipart/form-data" >
         <h1>파일 업로드</h1>
         <label class="pull-left">파일:</label>
         <input multiple="multiple" type="file" name="data">
         <input type="submit" class="btn btn-primary" value="파일 업로드">
     </form>
+    </c:if>
 </div>
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 </body>

@@ -2,6 +2,7 @@ package web.fileshare.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import web.fileshare.domain.FileDTO;
+import web.fileshare.security.CustomUserDetails;
 import web.fileshare.service.impl.FileServiceimpl;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,12 +22,11 @@ import java.util.ArrayList;
 @Controller
 @Slf4j
 public class FileController {
-
     @Autowired
     private FileServiceimpl fs;
 
     @RequestMapping(value = "/service", method = {RequestMethod.GET, RequestMethod.POST})
-    public String service(Model model, HttpServletRequest request, @RequestParam(value = "data",required = false) MultipartFile data) throws Exception {
+    public String service(Model model, Authentication authentication, @RequestParam(value = "data",required = false) MultipartFile data) throws Exception {
         if (data != null) {
             //String rootDirectory = request.getSession().getServletContext().getRealPath("/");
             try {
@@ -52,6 +52,8 @@ public class FileController {
         if (!filelist.isEmpty()) {
             model.addAttribute("FileList", filelist);
         }
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        model.addAttribute("userID", userDetails.getUsername());
         return "service";
     }
 

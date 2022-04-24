@@ -11,8 +11,6 @@ import web.fileshare.domain.UserDTO;
 import web.fileshare.service.impl.LoginSecurityService;
 import web.fileshare.service.impl.LoginServiceimpl;
 
-import javax.servlet.http.HttpSession;
-
 @Controller
 @Slf4j
 public class LoginController {
@@ -28,12 +26,12 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public void login(HttpSession session, @RequestParam(value = "id", required = false) String id
+    public void login(@RequestParam(value = "id", required = false) String id
             , @RequestParam(value = "password", required = false) String password) throws Exception {
-        var user = ls.login(new UserDTO(id,password, ERoleType.USER));
-        if (user == 1) {
+        UserDTO user = new UserDTO(id,password, ERoleType.USER);
+        int login = ls.login(user);
+        if (login == 1) {
             loginSecurity.loadUserByUsername(id);
-            //session.setAttribute("userID", id);
         }
     }
 }
