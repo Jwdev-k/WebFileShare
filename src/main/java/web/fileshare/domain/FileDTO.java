@@ -5,11 +5,16 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.io.Serial;
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @ToString
-public class FileDTO {
+public class FileDTO implements Serializable {
+    @Serial
+    private static final long serialVersionUID = -8686912670594729934L;
     private int num;
     private String filename;
     private String dataPath;

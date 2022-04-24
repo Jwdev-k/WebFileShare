@@ -14,6 +14,7 @@ import web.fileshare.security.CustomUserDetails;
 import web.fileshare.service.impl.FileServiceimpl;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URLEncoder;
@@ -26,7 +27,8 @@ public class FileController {
     private FileServiceimpl fs;
 
     @RequestMapping(value = "/service", method = {RequestMethod.GET, RequestMethod.POST})
-    public String service(Model model, Authentication authentication, @RequestParam(value = "data",required = false) MultipartFile data) throws Exception {
+    public String service(Model model, HttpSession session, Authentication authentication
+            , @RequestParam(value = "data",required = false) MultipartFile data) throws Exception {
         if (data != null) {
             //String rootDirectory = request.getSession().getServletContext().getRealPath("/");
             try {
@@ -53,7 +55,9 @@ public class FileController {
             model.addAttribute("FileList", filelist);
         }
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-        model.addAttribute("userID", userDetails.getUsername());
+        if (userDetails != null) {
+            session.setAttribute("userID", userDetails.getUsername());
+        }
         return "service";
     }
 

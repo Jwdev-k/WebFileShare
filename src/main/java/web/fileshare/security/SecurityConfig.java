@@ -13,7 +13,6 @@ import web.fileshare.service.impl.LoginSecurityService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     @Autowired
     LoginSecurityService loginSecurity;
 
