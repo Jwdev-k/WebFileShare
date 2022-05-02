@@ -2,6 +2,7 @@ package web.fileshare.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import web.fileshare.domain.FileDTO;
 import web.fileshare.domain.repository.FileDAO;
 import web.fileshare.service.FileService;
@@ -9,6 +10,7 @@ import web.fileshare.service.FileService;
 import java.util.ArrayList;
 
 @Service
+@Transactional
 public class FileServiceimpl implements FileService {
 
     @Autowired

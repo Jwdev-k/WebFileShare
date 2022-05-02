@@ -27,9 +27,9 @@ public class LoginSecurityService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
-           var user = ld.loginSecurity(username);
+           UserDTO user = ld.loginSecurity(username);
            if (user != null) {
-               var userData = ld.login(new UserDTO(user.getId(),user.getPassword(), user.getRole()));
+               UserDTO userData = ld.login(new UserDTO(user.getId(),user.getPassword(), user.getRole()));
                if (userData != null) {
                    PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
                    List<GrantedAuthority> authorities = new ArrayList<>();//사용자의 권한정보를 설정하는 부분.

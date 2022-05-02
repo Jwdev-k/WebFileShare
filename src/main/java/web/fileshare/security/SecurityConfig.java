@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/service/delete").hasRole("ADMIN")
+                .antMatchers("/service/delete").hasRole("ADMIN") // ROLE_
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/")
                 .loginProcessingUrl("/login")
@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        // 정적인 파일 요청에 대해 무시
         web.ignoring().antMatchers("/resources/**");
     }
 
