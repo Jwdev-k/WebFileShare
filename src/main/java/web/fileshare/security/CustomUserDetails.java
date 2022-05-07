@@ -4,10 +4,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.io.Serial;
 import java.util.Collection;
 
 @AllArgsConstructor
 public class CustomUserDetails implements UserDetails {
+    @Serial
+    private static final long serialVersionUID = -6613434008874770290L;
+
     private String username;
     private String password;
     private boolean isEnabled;

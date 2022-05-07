@@ -29,14 +29,11 @@ public class LoginSecurityService implements UserDetailsService {
         try {
            UserDTO user = ld.loginSecurity(username);
            if (user != null) {
-               UserDTO userData = ld.login(new UserDTO(user.getId(),user.getPassword(), user.getRole()));
-               if (userData != null) {
-                   PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-                   List<GrantedAuthority> authorities = new ArrayList<>();//사용자의 권한정보를 설정하는 부분.
-                   authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
-                   return new CustomUserDetails(user.getId(), passwordEncoder.encode(user.getPassword())
-                           , true, true, true, true, authorities);
-               }
+               PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+               List<GrantedAuthority> authorities = new ArrayList<>();//사용자의 권한정보를 설정하는 부분.
+               authorities.add(new SimpleGrantedAuthority(user.getRole().toString()));
+               return new CustomUserDetails(user.getId(), passwordEncoder.encode(user.getPassword())
+                       , true, true, true, true, authorities);
            } else {
                throw new UsernameNotFoundException(username + "를 찾을수 없음");
            }
