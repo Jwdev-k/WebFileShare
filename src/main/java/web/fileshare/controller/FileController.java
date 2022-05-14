@@ -14,11 +14,12 @@ import web.fileshare.security.CustomUserDetails;
 import web.fileshare.service.impl.FileServiceimpl;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 @Slf4j
@@ -27,7 +28,7 @@ public class FileController {
     private FileServiceimpl fs;
 
     @RequestMapping(value = "/service", method = {RequestMethod.GET, RequestMethod.POST})
-    public String service(Model model, HttpSession session, Authentication authentication
+    public String service(Model model, Authentication authentication
             , @RequestParam(value = "data",required = false) MultipartFile data) throws Exception {
         if (data != null) {
             //String rootDirectory = request.getSession().getServletContext().getRealPath("/");
@@ -56,7 +57,10 @@ public class FileController {
         }
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         if (userDetails != null) {
-            session.setAttribute("userID", userDetails.getUsername());
+            model.addAttribute("userID", userDetails.getUsername());
+            Date nowDate = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd a HH:mm:ss");
+            log.info(userDetails.getUsername() + "님이 서비스에 접속 " + simpleDateFormat.format(nowDate));
         }
         return "service";
     }
