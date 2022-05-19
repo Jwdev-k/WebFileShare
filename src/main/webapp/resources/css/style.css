@@ -1,0 +1,140 @@
+body{
+    background-image: linear-gradient(to bottom right, #e66465, #9198e5);
+    min-height: 100vh;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.login{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 400px;
+    background: white;
+    border-radius: 10px;
+}
+
+.login h1{
+    text-align: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
+}
+
+.login form{
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.login form .txt_field{
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+
+.login form .txt_field input{
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+.login form .txt_field label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: .2s;
+}
+
+.login form .txt_field span::before{
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #2691d9;
+    transition: .4s;
+}
+
+.login form .txt_field input:focus ~ label,
+.login form .txt_field input:valid ~ label{
+    top: -5px;
+    color: #2691d9;
+}
+
+.login form .txt_field input:focus ~ span::before,
+.login form .txt_field input:valid ~ span::before{
+    width: 100%;
+}
+
+.login form .pass{
+    margin: -5px 0 20px 5px;
+    color: #a6a6a6;
+    cursor: pointer;
+}
+
+.login form .pass:hover{
+    text-decoration: underline;
+}
+
+.login form input[type="submit"]{
+    width: 100%;
+    height: 50px;
+    border: 1px solid;
+    background: #2691d9;
+    border-radius: 25px;
+    font-size: 18px;
+    color: #e9f4fb;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.login form input[type="submit"]:hover{
+    border-color: #2691d9;
+    transition: .4s;
+}
+
+.login form .signup_link{
+    margin: 30px 0;
+    text-align: center;
+    font-size: 16px;
+    color: #666666;
+}
+
+.login form .signup_link a{
+    color: #2691d9;
+    text-decoration: none;
+}
+
+.login form .signup_link a:hover{
+    text-decoration: underline;
+}
+
+.login form .naverlg button{
+    background-image: url(./assets/naverlg_btn.png);
+    width: 100%;
+    height: 50px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 25px;
+}
+
+.login form .kakaolg button{
+    background-image: url(./assets/kakaolg_btn.png);
+    width: 100%;
+    height: 50px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 25px;
+}

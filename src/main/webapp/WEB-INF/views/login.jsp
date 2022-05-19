@@ -1,27 +1,32 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css">
     <title>Web File Share Service</title>
 </head>
 <body>
-<div class="container" style="text-align: center">
-    <div class="col-lg-4"></div>
-    <div class="col-lg-4">
-        <div class="jumbotron" style="padding-top: 20px;">
-            <form method="post" action="/login">
-                <h3 style="text-align: center;">로그인을 해주세요.</h3>
-                <div class="form-group">
-                    <input type="id" class="form-control" placeholder="아이디" name="id" maxlength="20">
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" placeholder="비밀번호" name="password" maxlength="20">
-                </div>
-                <input type="submit" class="btn btn-primary form-control" value="로그인">
+    <section class="login" id="login">
+        <h1>Login</h1>
+        <form method="post" action="/login">
+            <div class="txt_field">
+                <input type="text" name="id" maxlength="20" required>
+                <span></span>
+                <label>ID</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" name="password" maxlength="20" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <div class="pass">Forgot Password?</div>
+            <div class="button">
+                <input type="submit" value="login" id="loginbtn">
+            </div>
+            <div class="signup_link">
+                Not a member? <a href="#">Sign Up</a>
+            </div>
             </form>
-        </div>
-    </div>
-</div>
-<script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+    </section>
 </body>
 </html>
